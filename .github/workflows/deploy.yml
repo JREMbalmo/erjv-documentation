@@ -1,0 +1,47 @@
+name: Build and Deploy Docs
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' 
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Docs
+        uses: actions/checkout@v4
+      
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: KlioProg/erjv-frontend
+          path: external/frontend-repo
+          token: ${{ secrets.DOCS_PAT }}
+      
+      - name: Checkout Backend
+        uses: actions/checkout@v4
+        with:
+          repository: raffimolero/erjv-backend
+          path: external/backend-repo
+          token: ${{ secrets.DOCS_PAT }}
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      
+      - run: npm ci
+      - run: npm run build
+      
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: build }
+      - id: deployment
+        uses: actions/deploy-pages@v4
