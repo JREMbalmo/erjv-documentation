@@ -20,23 +20,9 @@ jobs:
     steps:
       - name: Checkout Docs
         uses: actions/checkout@v4
-      
-      - name: Checkout Frontend
-        uses: actions/checkout@v4
-        with:
-          repository: KlioProg/erjv-frontend
-          path: external/frontend-repo
-          token: ${{ secrets.DOCS_PAT }}
-      
-      - name: Checkout Backend
-        uses: actions/checkout@v4
-        with:
-          repository: raffimolero/erjv-backend
-          path: external/backend-repo
-          token: ${{ secrets.DOCS_PAT }}
 
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        with: { node-version: 24 }
       
       - run: npm ci
       - run: npm run build

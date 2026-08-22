@@ -132,7 +132,7 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
 
-  plugins: [
+  plugins: process.env.GITHUB_ACTIONS ? [] : [
     [
       'docusaurus-plugin-typedoc',
       {
