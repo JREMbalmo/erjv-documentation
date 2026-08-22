@@ -1,0 +1,4 @@
+// @ts-check
+/** @type {import("@docusaurus/plugin-content-docs").SidebarsConfig} */
+const typedocSidebar = {items:[{type:"category",label:"Type Aliases",items:[{type:"doc",id:"frontend-api/type-aliases/AuthMode",label:"AuthMode"},{type:"doc",id:"frontend-api/type-aliases/AuthRequest",label:"AuthRequest"},{type:"doc",id:"frontend-api/type-aliases/ForgotPasswordRequest",label:"ForgotPasswordRequest"},{type:"doc",id:"frontend-api/type-aliases/LoginRequest",label:"LoginRequest"},{type:"doc",id:"frontend-api/type-aliases/SignupRequest",label:"SignupRequest"}]}]};
+module.exports = typedocSidebar.items;
